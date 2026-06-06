@@ -17,6 +17,9 @@ The system works natively with a structured dual-dataset environment:
 ## 📁 Repository Structure
 
 ```text
+├── data/
+│   ├── hr.csv               # Internal employee retention dataset
+│   └── Placement_Data...csv # External candidate recruitment dataset
 ├── models/
 │   ├── model.pkl            # Trained Machine Learning classification model
 │   └── scaler.pkl           # Feature scaler pipeline
