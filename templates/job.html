@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Placement & Recruitment</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f4f6f9;
+            color: #333333;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Formu tutan ana kart yapısı */
+        .custom-card {
+            background: #ffffff;
+            border-radius: 16px !important;
+            padding: 40px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            border: none !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Giriş kutularının (input/select) modern lüks görünümü */
+        .form-control, .form-select {
+            border-radius: 10px !important;
+            height: 46px;
+            border: 1px solid #dee2e6;
+            padding-left: 15px;
+            font-size: 0.95rem;
+            transition: all 0.25s ease;
+        }
+
+        /* Kutulara tıklandığında (Focus) çıkacak tatlı turuncu gölge */
+        .form-control:focus, .form-select:focus {
+            border-color: #f39c12 !important;
+            box-shadow: 0 0 0 0.25rem rgba(243, 156, 18, 0.15) !important;
+            outline: none;
+        }
+
+        /* Etiket yazı stilleri */
+        .form-label {
+            font-size: 0.9rem;
+            color: #555555;
+            margin-bottom: 8px;
+        }
+
+        /* Butonun tamamen oval ve geçişli hali */
+        .btn-predict {
+            border-radius: 12px !important;
+            padding: 14px 20px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            border: none;
+            color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        .btn-predict:hover {
+            background: linear-gradient(135deg, #c0392b, #962d22);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+        }
+
+        /* Tahmin Sonuç Kutusu */
+        .result-card {
+            background: #1e272e;
+            color: #ffffff;
+            margin-top: 30px;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container-fluid" style="background:#FCDCCB; height:70px; padding: 10px 20px;">
+            <a class="navbar-brand fw-bold text-dark" href="/">HR Performance</a>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link px-3" href="/index" style="transition: background-color 0.3s ease;" onmouseover="this.style.backgroundColor='orange';" onmouseout="this.style.backgroundColor='transparent';"><i class="bi bi-house-door"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3" href="/job" style="transition: background-color 0.3s ease;" onmouseover="this.style.backgroundColor='orange';" onmouseout="this.style.backgroundColor='transparent';"><i class="bi bi-briefcase"></i> Recruitment</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3" href="/ana" style="transition: background-color 0.3s ease;" onmouseover="this.style.backgroundColor='orange';" onmouseout="this.style.backgroundColor='transparent';"><i class="bi bi-bar-chart"></i> Dashboard</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="custom-card border">
+                    <h2 class="text-center fw-bold text-dark mb-2">Aday Değerlendirme ve İşe Alım Formu</h2>
+                    <p class="text-muted text-center mb-5">Lütfen adaya ait akademik ve profesyonel geçmiş verilerini eksiksiz doldurunuz.</p>
+
+                    <form action="/placement" method="post">
+                        
+                        <div class="row g-4 mb-4">
+                            <div class="col-md-6">
+                                <label for="sl_no" class="form-label fw-bold">Sıra No (Serial Number)</label>
+                                <input type="number" class="form-control" id="sl_no" name="sl_no" placeholder="Örn: 1" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="gender" class="form-label fw-bold">Cinsiyet (Gender)</label>
+                                <select class="form-select" id="gender" name="gender">
+                                    <option value="Male">Erkek (Male)</option>
+                                    <option value="Female">Kadın (Female)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row g-4 mb-4">
+                            <div class="col-md-6">
+                                <label for="ssc_p" class="form-label fw-bold">Ortaöğretim Başarı Yüzdesi (SSC - 10. Sınıf)</label>
+                                <input type="number" class="form-control" id="ssc_p" name="ssc_p" step="0.01" placeholder="Örn: 67.00" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="hsc_p" class="form-label fw-bold">Lise Başarı Yüzdesi (HSC - 12. Sınıf)</label>
+                                <input type="number" class="form-control" id="hsc_p" name="hsc_p" step="0.01" placeholder="Örn: 70.15" required>
+                            </div>
+                        </div>
+
+                        <div class="row g-4 mb-4">
+                            <div class="col-md-6">
+                                <label for="degree_p" class="form-label fw-bold">Lisans Not Ortalaması Yüzdesi (Degree)</label>
+                                <input type="number" class="form-control" id="degree_p" name="degree_p" step="0.01" placeholder="Örn: 58.00" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="workex" class="form-label fw-bold">İş Deneyimi Var mı? (Work Experience)</label>
+                                <select class="form-select" id="workex" name="workex">
+                                    <option value="No">Hayır (No)</option>
+                                    <option value="Yes">Evet (Yes)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row g-4 mb-4">
+                            <div class="col-md-6">
+                                <label for="etest_p" class="form-label fw-bold">Yetenek Testi Puan Yüzdesi (E-Test)</label>
+                                <input type="number" class="form-control" id="etest_p" name="etest_p" step="0.01" placeholder="Örn: 55.00" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="specialisation" class="form-label fw-bold">Uzmanlık Alanı (Specialization)</label>
+                                <select class="form-select" id="specialisation" name="specialisation" required>
+                                    <option value="Mkt&HR">Pazarlama & İK (Mkt&HR)</option>
+                                    <option value="Mkt&Fin">Pazarlama & Finans (Mkt&Fin)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row g-4 mb-5">
+                            <div class="col-md-6">
+                                <label for="mba_p" class="form-label fw-bold">MBA / Yüksek Lisans Başarı Yüzdesi (MBA)</label>
+                                <input type="number" class="form-control" id="mba_p" name="mba_p" step="0.01" placeholder="Örn: 65.00" required>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-predict w-100 d-flex align-items-center justify-content-center gap-2">
+                            <i class="bi bi-cpu"></i> Adayı Değerlendir (Predict)
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if result %}
+    <div class="container mb-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="result-card text-center">
+                    <h1 class="display-4 fw-bold {% if result == 'Placed' %}text-success{% else %}text-danger{% endif %}">
+                        {{ result }}
+                    </h1>
+                    <p class="lead mt-3 text-light-50">{{ rec }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
